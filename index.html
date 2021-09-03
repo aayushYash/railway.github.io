@@ -1,0 +1,515 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Railway</title>
+    <link href="https://fonts.googleapis.com/css2?family=Hina+Mincho&display=swap" rel="stylesheet">
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Hina Mincho', serif;
+        }
+        .bubble{
+            height: 100%;
+            width: 100%;
+            /* background: red; */
+            position: absolute;
+            z-index: -1;
+            
+            
+        }
+        .bubble:nth-child(1)
+        {
+            background: linear-gradient(45deg,#ff6b6b,transparent,#ff6b6b) ;
+            clip-path: circle(15% at 7% 90%);
+            /* clip-path: polygon(); */
+            /* clip-path: polygon(0% 0%, 0% 100%, 25% 100%, 25% 25%, 75% 25%, 75% 75%, 25% 75%, 25% 100%, 100% 100%, 100% 0%); */
+            /* clip-path: polygon(0% 0%, 0 40%, 9% 40%, 9% 9%, 44% 9%, 45% 31%, 8% 31%, 9% 40%, 55% 40%, 54% 0); */
+            z-index: -1;
+        }
+        .bubble:nth-child(2)
+        {
+            background: linear-gradient(45deg,#ff6b6b,transparent,#ff6b6b) ;
+            clip-path: circle(20% at 0% 2%);
+            z-index: -1;
+        }
+        .bubble:nth-child(3)
+        {
+            background: linear-gradient(45deg,#ff6b6b,transparent,#ff6b6b,transparent) ;
+            clip-path: circle(10% at 100% 0%);
+            z-index: -1;
+        }
+        .bubble:nth-child(4)
+        {
+            background: linear-gradient(45deg, #ff6b6b ,transparent,#ff6b6b,transparent) ;
+            clip-path: circle(15% at 100% 100%);
+            z-index: -1;
+        }
+        .container{
+            /* background-color: red; */
+            min-height: 90vh;
+            width: 70%;
+            top: 6vh;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            /* margin-top: 10px; */
+            margin: auto 10%;
+            display: flex;
+            position: relative;
+
+        }
+        .container .info{
+            /* background-color: white; */
+            color: #fff;
+            position: absolute;
+            height: calc(100% - 150px);
+            display: flex;
+            top: 40px;
+            border-radius: 20px;
+            flex-direction: column;
+            width: 220px;
+            background: linear-gradient(45deg,transparent,#ff6b6b);
+            z-index: 1;
+            box-shadow: 0px 50px 60px rgba(0, 0, 0,0.5);
+            padding: 25px;
+            backdrop-filter: blur(20px);
+            font-weight: 800;
+
+        }
+        .container .info h1{
+            font-weight: 100;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            margin: 5px;
+            width: 100%;
+            text-align: center;
+            border-bottom: 1px solid #fff;
+            filter: drop-shadow(4px 4px 0.9px rgba(0,0,0,0.5));
+
+            /* align-items: baseline; */
+            font-weight: 800;
+
+        }
+        .container .info h1 span{
+            font-size: 55px;
+            line-height: 55px;
+            font-weight: 600;
+            transform: scale(2,1 );
+            color: #012443;
+
+        }
+        .container .info ul{
+            position: relative;
+            margin: 20px 0;
+        }
+        .container .info ul li{
+            display: flex;
+            position: relative;
+            align-items: flex-start;
+            font-size: 24px;
+            border-bottom: 1px solid #01244327;
+            border-bottom-left-radius: 10px;
+            padding-left: 10px;
+            letter-spacing: 2px;
+            /* text-transform: uppercase; */
+        }
+        .container .railway{
+            position: absolute;
+            padding: 70px 20px;
+            padding-left: 150px;
+            /* background-color: blue; */
+            height: 100%;
+            width: 100%;
+            margin-left: 100px;
+            color: #fff;
+            /* background: white; */
+            background: linear-gradient(45deg,transparent,#ff6b6b);
+            border-radius: 20px;
+            box-shadow: 0px 50px 60px rgba(0, 0, 0,0.5);
+            /* color: white; */
+            font-size: 22px;
+            font-weight: 500;
+            backdrop-filter: blur(20px);
+
+
+        }
+        .container .railway h1{
+            /* background-color: white; */
+            width: 100%;
+            text-align: center;
+            letter-spacing: 3px;
+            /* text-transform: uppercase; */
+            border-bottom: 1px solid #fff;
+            color: #fff;
+            border-bottom-left-radius: 25px;
+            border-bottom-right-radius: 25px;
+            margin-bottom: 30px;
+            font-weight: 300;
+            filter: drop-shadow(4px 4px 0.9px rgba(0,0,0,0.5));
+
+
+        }
+        .container .railway span{
+            color: #012443;
+            font-size: 22px;
+            font-weight: 500;
+
+        }
+        .container .railway h1 span{
+            /* transform: scale(1.2,1.5); */
+            /* background-color: red; */
+            font-size: 55px;
+            line-height: 55px;
+            font-weight: 600;
+            transform: scale(2,1 );
+            /* filter: drop-shadow(6px 1px 1px rgba(0,0,0,0.5)); */
+        }
+        /* .container .railway form{
+            display: flex;
+            /* background-color: aqua; */
+            /* padding: clamp(10%,15%,30%);
+            row-gap: 5px;
+            flex-direction: column; */
+        
+        .container .railway form{
+            display: grid;
+            /* background-color: #fff; */
+            /* background-color: aquamarine; */
+            column-gap: 15px;
+            width: 100%;
+            grid-template-columns: 33% 33% 33%;
+            font-size: 20px;
+            height: calc(100% - 10%);
+            position: relative;
+            row-gap: 5px;
+            /* column-width: 200px; */
+            /* column-rule: 2px solid black ; */
+            /* -ms-grid-row-align: start; */
+
+        }
+        .container .railway form span{
+            /* background-color: blue; */
+            width: 100%;
+            align-items: center;
+            text-align: right;
+            height: 40px;
+            line-height: 40px;
+            font-weight: 800;
+
+            /* border-bottom: 1px solid rgba(145, 2, 208,0.75); */
+            /* background-color: rebeccapurple; */
+            /* grid-area: span1; */
+
+        }
+        .container .railway form select,input
+        {
+            /* grid-column: s; */
+            justify-self: left;
+            width: 50%;
+            height: 35px;
+            border-radius: 10px;
+            outline: none;
+            border: 2px solid #ff6b6b;
+            padding-left: 10px;
+            font-size: 20px;
+            
+        }
+
+        .container .railway form .note{
+            grid-row: span 4;
+            padding: 5px;
+            /* background-color: aqua; */
+            height: 100%;
+            position: relative;
+            width: 100%;
+            justify-content: center;
+            align-items: center;
+            display: flex;
+            word-wrap: break-word;
+            border-left: 1.5px solid #ff6b6b;
+            color: #fff;
+            font-weight: 800;
+            letter-spacing: 2px;
+            /* right: 0; */
+            /* max-width: 100px; */
+        }
+
+        .container .railway form #butn{
+            width: 150px;
+            background: linear-gradient(45deg,transparent,#ff6b6b);
+            border: 2px solid #fff;
+            box-shadow: 0px 5px 20px rgba(0, 0, 0,0.5);
+            color: #fff;
+            
+            /* grid-column: span 2; */
+        }
+        
+        .container .railway form .result{
+            grid-column: span 2;
+            place-self: center;
+            transition: border-bottom .5s;
+            text-align: center;
+            border-bottom: 2px solid #fff;
+            /* border-left: 2px solid #fff;
+            border-right: 2px solid #fff; */
+            width: fit-content;
+            padding: 1px;
+        }
+        .container .railway form #show{
+            font-size: 24px;
+            font-weight: 100;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            word-wrap:break-word;
+            height: fit-content;
+            line-height: 25px;
+            position: relative;
+            /* background-image: linear-gradient(90deg,#012443,#ff6b6b); */
+            /* -webkit-background-clip: border-box; */
+            color: #012443;
+            font-weight: 800;
+            /* box-shadow: 0px 5px 10px #012443; */
+            /* outline-color: #fff; */
+            
+        }
+        @media screen and (max-width: 990px) {
+            .container{
+                /* background-color: red; */
+                flex-direction: column;
+                margin: auto;
+                width: 100%;
+                padding: 0;
+            }
+            .container .info{
+                position: relative;
+                color: #fff;
+                /* position: absolute; */
+                /* height: calc(100% - 150px); */
+                height: 300px;
+                margin: 0px;
+                display: flex;
+                margin-bottom: 40px;
+                /* top: 40px; */
+                border-radius: 20px;
+                flex-direction: column;
+                width: 100%;
+                /* background: blueviolet; */
+                background: linear-gradient(45deg,transparent,#ff6b6b);
+                z-index: 0;
+                box-shadow: 0px 50px 60px rgba(0, 0, 0,0.5);
+                padding: 25px;
+                backdrop-filter: blur(20px);
+                font-weight: 800;
+            }
+            .container .railway{
+                position: relative;
+                width: 100%;
+                margin: 0;
+                /* margin-left: 0px; */
+                padding: 0;
+                margin-top: 10px;
+                /* height: 600px; */
+                /* height: calc(fit-content + 100px); */
+            }
+            .container .railway form{
+                display: flex;
+                flex-direction: column;
+                /* background-color: aqua; */
+                /* grid-template-columns: 100%; */
+                column-gap: 0;
+                row-gap: 5px;
+                padding: 0;
+            }
+            .container .railway form span{
+                text-align: center;
+                /* background-color: blue; */
+            }
+            .container .railway form input,
+            .container .railway form select{
+                justify-self: center;
+                margin: 0 auto;
+            }
+            .container .railway form .note{
+                bottom: 0;
+                /* background-color: #012443; */
+                position: absolute;
+                height: fit-content;
+                display: none;
+                /* margin: 20px; */
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="bubble"></div>
+    <div class="bubble"></div>
+    <div class="bubble"></div>
+    <div class="bubble"></div>
+    <div class="container">
+        <div class="info">
+            <h1><span>D</span>etails</h1>
+            <ul>
+                <li>Aayush Yash</li>
+                <li>BCA/40531/20</li>
+                <li>Semester III</li>
+                <li>Subj IT Lab</li>
+            </ul>
+        </div>
+        <div class="railway">
+            <h1><span>R</span>ailway <span>F</span>are <span>C</span>alculator</h1>
+            <form action="" class="fare">
+                
+                    <span>Source Station</span>
+                    <select name="" id="source">
+                        <option value="Ranchi">Ranchi</option>
+                        <option value="Dhanbad">Dhanbad</option>
+                        <option value="Kolkata">Kolkata</option>
+                        <option value="Delhi">Delhi</option>
+                    </select>
+                    <div class="note" id="notedisplay"></div>
+                    <span>Destination Station</span>
+                    <select name="" id="destination">
+                        <option value="Ranchi">Ranchi</option>
+                        <option value="Patna">Patna</option>
+                        <option value="Howrah">Howrah</option>
+                        <option value="Allahabad">Allahabad</option>
+                    </select>
+                    <span>No. of passanger</span>
+                    <input type="text" class="" id="passanger">
+                    <input type="button" value="Generate Fare" class="result" id="butn" onclick="calcfare()">
+                    <span class="result" id="show"></span>
+            </form>
+        </div>
+    </div>
+    <script>
+            function calcfare(){
+                const src=document.getElementById("source").value;
+                const dest=document.getElementById("destination").value;
+                var pass=parseInt(document.getElementById("passanger").value);
+
+                switch (src)
+                {
+                    case 'Ranchi':{
+                        switch (dest)
+                        {
+                            case 'Ranchi': document.getElementById("show").innerHTML="Select different destination";
+                            break;
+                            case 'Patna' : {
+                               
+                                document.getElementById("show").innerHTML="Fare of "+src+" to "+dest+" for "+pass+" people is "+(500*pass).toString();
+                                document.getElementById("notedisplay").innerHTML="Note::\nBasic fare of "+src+" to "+dest+" is 500";
+                            }
+                            break;
+                            case 'Howrah' : {
+                               
+                               document.getElementById("show").innerHTML="Fare of "+src+" to "+dest+" for "+pass+" people is "+(800*pass).toString();
+                               document.getElementById("notedisplay").innerHTML="Note::\nBasic fare of "+src+" to "+dest+" is 800";
+                           }
+                           break;
+                           case 'Allahabad' : {
+                               
+                               document.getElementById("show").innerHTML="Fare of "+src+" to "+dest+" for "+pass+" people is "+(1100*pass).toString();
+                               document.getElementById("notedisplay").innerHTML="Note::\nBasic fare of "+src+" to "+dest+" is 1100";
+                           }
+                           break;
+                        }
+                    }
+                    break;
+                    case 'Dhanbad':{
+                        switch (dest)
+                        {
+                            case 'Ranchi': {
+                                document.getElementById("show").innerHTML="Fare of "+src+" to "+dest+" for "+pass+" people is "+(600*pass).toString();
+                                document.getElementById("notedisplay").innerHTML="Note::\nBasic fare of "+src+" to "+dest+" is 600";
+                            }
+                            break;
+                            case 'Patna' : {
+                               
+                                document.getElementById("show").innerHTML="Fare of "+src+" to "+dest+" for "+pass+" people is "+(400*pass).toString();
+                                document.getElementById("notedisplay").innerHTML="Note::\nBasic fare of "+src+" to "+dest+" is 400";
+                            }
+                            break;
+                            case 'Howrah' : {
+                               
+                               document.getElementById("show").innerHTML="Fare of "+src+" to "+dest+" for "+pass+" people is "+(500*pass).toString();
+                               document.getElementById("notedisplay").innerHTML="Note::\nBasic fare of "+src+" to "+dest+" is 500";
+                           }
+                           break;
+                           case 'Allahabad' : {
+                               
+                               document.getElementById("show").innerHTML="Fare of "+src+" to "+dest+" for "+pass+" people is "+(1000*pass).toString();
+                               document.getElementById("notedisplay").innerHTML="Note::\nBasic fare of "+src+" to "+dest+" is 1000";
+                           }
+                           break;
+                        }
+                    }
+                    break;
+                    case 'Kolkata':{
+                        switch (dest)
+                        {
+                            case 'Ranchi': {
+                                document.getElementById("show").innerHTML="Fare of "+src+" to "+dest+" for "+pass+" people is "+(500*pass).toString();
+                                document.getElementById("notedisplay").innerHTML="Note::\nBasic fare of "+src+" to "+dest+" is 500";
+                            }
+                            break;
+                            case 'Patna' : {
+                               
+                                document.getElementById("show").innerHTML="Fare of "+src+" to "+dest+" for "+pass+" people is "+(700*pass).toString();
+                                document.getElementById("notedisplay").innerHTML="Note::\nBasic fare of "+src+" to "+dest+" is 700";
+                            }
+                            break;
+                            case 'Howrah' : {
+                               
+                               document.getElementById("show").innerHTML="Fare of "+src+" to "+dest+" for "+pass+" people is "+(200*pass).toString();
+                               document.getElementById("notedisplay").innerHTML="Note::\nBasic fare of "+src+" to "+dest+" is 200";
+                           }
+                           break;
+                           case 'Allahabad' : {
+                               
+                               document.getElementById("show").innerHTML="Fare of "+src+" to "+dest+" for "+pass+" people is "+(1300*pass).toString();
+                               document.getElementById("notedisplay").innerHTML="Note::\nBasic fare of "+src+" to "+dest+" is 1300";
+                           }
+                           break;
+                        }
+                    }
+                    break;
+                    case 'Delhi':{
+                        switch (dest)
+                        {
+                            case 'Ranchi': {
+                                document.getElementById("show").innerHTML="Fare of "+src+" to "+dest+" for "+pass+" people is "+(1800*pass).toString();
+                                document.getElementById("notedisplay").innerHTML="Note::\nBasic fare of "+src+" to "+dest+" is 1800";
+                            }
+                            break;
+                            case 'Patna' : {
+                               
+                                document.getElementById("show").innerHTML="Fare of "+src+" to "+dest+" for "+pass+" people is "+(1500*pass).toString();
+                                document.getElementById("notedisplay").innerHTML="Note::\nBasic fare of "+src+" to "+dest+" is 1500";
+                            }
+                            break;
+                            case 'Howrah' : {
+                               
+                               document.getElementById("show").innerHTML="Fare of "+src+" to "+dest+" for "+pass+" people is "+(2000*pass).toString();
+                               document.getElementById("notedisplay").innerHTML="Note::\nBasic fare of "+src+" to "+dest+" is 2000";
+                           }
+                           break;
+                           case 'Allahabad' : {
+                               
+                               document.getElementById("show").innerHTML="Fare of "+src+" to "+dest+" for "+pass+" people is "+(800*pass).toString();
+                               document.getElementById("notedisplay").innerHTML="Note::\nBasic fare of "+src+" to "+dest+" is 800";
+                           }
+                           break;
+                        }
+                    }
+                    break;
+                }
+            }
+            
+    </script>
+</body>
+</html>
